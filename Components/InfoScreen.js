@@ -1,7 +1,13 @@
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity,Modal, Button } from 'react-native';
 
  InfoScreen = (props) => {
   
+  const [visibleModal, setVisibleModal] = useState(null);
+
+  const openModal = (modalId) => setVisibleModal(modalId);
+  const closeModal = () => setVisibleModal(null);
 
   const creationData = [
     {
@@ -39,9 +45,12 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
   return (
     <ScrollView style={styles.container}>
       {/* Section 1: About the App */}
+      <View>
+        <Button title='Home' onPress={()=>props.navigation.navigate("Home")}/>
+      </View>
       <View style={styles.section}>
         <Text style={styles.header}>
-          Unleash Your Creativity with <Text style={styles.highlight}>Uber</Text>
+          Unleash Your Creativity with <Text style={styles.highlight}>SnapStory</Text>
         </Text>
         <Text style={styles.description}>
           Our app is a generative storytelling app that takes input from users and creates video stories. Follow these steps to create your own video:
@@ -55,35 +64,78 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 
       {/* Section 2: How to Use the App */}
       <View style={styles.section}>
-        <Text style={styles.section2}>Learn how to transform your story input into an immersive video in just a few steps.</Text>
+        
+      {/* Section 2: How to Use the App with Modals */}
+      <View style={styles.section}>
+        <Text style={styles.section2}>How to Create your own Stories.</Text>
         <View style={styles.grid}>
-          <View style={styles.gridItem}>
+          <TouchableOpacity style={styles.gridItem} onPress={() => openModal(1)}>
             <Text style={styles.gridTitle}>1. Enter Story Details</Text>
-            <Text style={styles.gridText}>
-              Story Input: Type or paste your narrative or plot into the input field.
-              Optionally add character names, settings, or plot points.
-            </Text>
-          </View>
-          <View style={styles.gridItem}>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.gridItem} onPress={() => openModal(2)}>
             <Text style={styles.gridTitle}>2. Generate Video</Text>
-            <Text style={styles.gridText}>
-              Tap the button to create your video. The app will process your story and generate scenes with visuals, narration, and audio. Processing time depends on story complexity.
-            </Text>
-          </View>
-          <View style={styles.gridItem}>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.gridItem} onPress={() => openModal(3)}>
             <Text style={styles.gridTitle}>3. Preview the Video</Text>
-            <Text style={styles.gridText}>
-              View a preview of the generated video to check if it meets expectations. If the app allows, provide feedback or request adjustments to the video.
-            </Text>
-          </View>
-          <View style={styles.gridItem}>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.gridItem} onPress={() => openModal(4)}>
             <Text style={styles.gridTitle}>4. Share or Share Feedback</Text>
-            <Text style={styles.gridText}>
-              Share the video with friends, family, or on social media. Optionally, provide feedback on the video or the app’s performance.
-            </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
+
+      {/* Modals for each step */}
+      <Modal visible={visibleModal === 1} transparent={true} animationType="slide">
+        <View style={styles.modalView}>
+          <Text style={styles.modalTitle}>Enter Story Details</Text>
+          <Text style={styles.modalText}>
+            Story Input: Type or paste your narrative or plot into the input field. Optionally add character names, settings, or plot points.
+          </Text>
+          <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+            <Text style={styles.buttonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+      <Modal visible={visibleModal === 2} transparent={true} animationType="slide">
+        <View style={styles.modalView}>
+          <Text style={styles.modalTitle}>Generate Video</Text>
+          <Text style={styles.modalText}>
+            Tap the button to create your video. The app will process your story and generate scenes with visuals, narration, and audio. Processing time depends on story complexity.
+          </Text>
+          <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+            <Text style={styles.buttonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+      <Modal visible={visibleModal === 3} transparent={true} animationType="slide">
+        <View style={styles.modalView}>
+          <Text style={styles.modalTitle}>Preview the Video</Text>
+          <Text style={styles.modalText}>
+            View a preview of the generated video to check if it meets expectations. If the app allows, provide feedback or request adjustments to the video.
+          </Text>
+          <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+            <Text style={styles.buttonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+      <Modal visible={visibleModal === 4} transparent={true} animationType="slide">
+        <View style={styles.modalView}>
+          <Text style={styles.modalTitle}>Share or Share Feedback</Text>
+          <Text style={styles.modalText}>
+            Share the video with friends, family, or on social media. Optionally, provide feedback on the video or the app’s performance.
+          </Text>
+          <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+            <Text style={styles.buttonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    </View>
 
       {/* Section 3: What Can You Create */}
       <View style={styles.section}>
@@ -98,6 +150,7 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
           ))}
         </View>
       </View>
+      
     </ScrollView>
   );
 };
@@ -118,11 +171,33 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  section2:{
+  section2: {
     fontSize: 25,
     color: '#fff',
     marginBottom: 10,
     fontWeight: 'bold',
+    textAlign: 'justify',
+  },
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  gridItem: {
+    width: '48%',
+    backgroundColor: '#ec8afd', // Light purple
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  gridTitle: {
+    fontSize: 18,
+    color: '#6a0dad',
+    fontWeight: 'bold',
+  },
+  gridText: {
+    color: '#000',
+    fontSize: 14,
     textAlign: 'justify',
   },
   section3:{
@@ -147,7 +222,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   gridItem: {
-    width: '100%',
+    width: '48%',
     backgroundColor: '#ec8afd', // Light shade of purple
     borderRadius: 5,
     padding: 10,
@@ -192,6 +267,38 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 18,
+    fontWeight: 'bold',
+  },
+  modalView: {
+    backgroundColor: '#fff',
+    margin: 30,
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#6a0dad',
+    marginBottom: 15,
+  },
+  modalText: {
+    fontSize: 16,
+    color: '#000',
+    textAlign: 'justify',
+    marginBottom: 20,
+  },
+  closeButton: {
+    backgroundColor: '#bb86fc',
+    padding: 10,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
     fontWeight: 'bold',
   },
 });
