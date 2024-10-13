@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
+//Home screen
 // Import your screens here
 import LoginScreen from './Components/LoginScreen'; // Example other screen
 
