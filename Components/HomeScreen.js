@@ -1,38 +1,77 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-//Home screen
-// Import your screens here
-import LoginScreen from './Components/LoginScreen'; // Example other screen
+import React, { useState } from 'react';
+import { View, ActivityIndicator, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import Video from 'react-native-video';
 
-const Drawer = createDrawerNavigator();
+const PEXELS_API_KEY = 'HMfO1xrbhfZeQcNvTsUiy8FKyTF01TmWEpDfNZcs64p3CXPGrhOjiez7';  // Replace with your actual Pexels API Key
 
 const HomeScreen = () => {
+  const [loading, setLoading] = useState(false);
+  const [videoURL, setVideoURL] = useState(null);
+  const [error, setError] = useState(null); // State to hold error messages
+
+  // Function to generate a random page number
+  const getRandomPageNumber = () => {
+    return Math.floor(Math.random() * 100) + 1; // Random page between 1 and 100
+  };
+
+  const fetchAndPlayVideo = async () => {
+    setLoading(true);
+    setVideoURL(null); // Reset video URL before fetching a new video
+    setError(null); // Reset error before fetching
+    const randomPage = getRandomPageNumber(); // Generate random page
+
+    try {
+      const response = await fetch(https://api.pexels.com/videos/search?query=nature&per_page=1&page=${randomPage}, {
+        headers: {
+          Authorization: PEXELS_API_KEY,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      const videoFile = data.videos[0]?.video_files[0]?.link; // Get the first video URL
+
+      if (videoFile) {
+        setVideoURL(videoFile);
+      } else {
+        setError('No video found for this query.'); // Set error if no video is found
+      }
+    } catch (error) {
+      console.error('Error fetching video:', error);
+      setError('Failed to fetch video.'); // Update state with error message
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Enter Your Prompt"
-        placeholderTextColor="#888" // Placeholder text color
+        placeholder="Enter your prompts"
+        placeholderTextColor="#888"
       />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Generate Video</Text>
+
+      <TouchableOpacity style={styles.button} onPress={fetchAndPlayVideo}>
+        <Text style={styles.buttonText}>Generate video</Text>
       </TouchableOpacity>
+
+      {loading && <ActivityIndicator size="large" color="#0000ff" />}
+      {videoURL && (
+        <Video
+          source={{ uri: videoURL }}
+          style={styles.videoPlayer}
+          useNativeControls
+          resizeMode="contain"
+          isLooping
+        />
+      )}
     </View>
   );
 };
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Other" component={LoginScreen} /> {/* Add more screens as needed */}
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -41,14 +80,18 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
   },
+  videoPlayer: {
+    width: '100%',
+    height: 200,
+    marginTop: 20,
+  },
   input: {
-    height: 150,
+    height: 100,
     backgroundColor: '#1e1e1e',
     color: '#ffffff',
     marginBottom: 20,
     paddingHorizontal: 10,
     borderRadius: 8,
-    alignContent: 'space-evenly',
   },
   button: {
     height: 50,
@@ -61,16 +104,10 @@ const styles = StyleSheet.create({
     color: '#ffffff', // Button text color
     fontSize: 18,
   },
-  title: {
-    color: '#ffffff', // Title text color
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 40,
-  },
-  linkText: {
-    color: '#bb86fc', // Link text color
-    textAlign: 'center',
-    marginTop: 20,
+  errorText: {
+    color: 'red', // Error message color
+    marginTop: 10,
   },
 });
+
+export default HomeScreen;
