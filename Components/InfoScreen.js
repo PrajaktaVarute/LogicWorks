@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity,Modal, Button } from 'react-native';
 
+import Video from 'react-native-video';
+
  InfoScreen = (props) => {
   
   const [visibleModal, setVisibleModal] = useState(null);
@@ -40,34 +42,57 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity,Modal, Butt
         'Unleash creativity with AI-generated comic stories. Develop humorous and visually engaging narratives that entertain and amuse.',
       imageUrl: 'https://i.pinimg.com/474x/c5/86/2e/c5862e45f6dd9069427a5ad7bb57ff78.jpg', // Comic image URL
     },
+    {
+      title: 'Fantasy',
+      description:
+        'Explore genre of fiction that involves magical elements, fantastical creatures, and often a setting in an imaginary world.',
+      imageUrl: 'https://th.bing.com/th/id/OIP.sZuxQ0eOou2gT_6MgNF8owHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7', // Comic image URL
+    },
   ];
 
   return (
     <ScrollView style={styles.container}>
       {/* Section 1: About the App */}
-      <View>
-        <Button title='Home' onPress={()=>props.navigation.navigate("Home")}/>
-      </View>
+      
       <View style={styles.section}>
-        <Text style={styles.header}>
-          Unleash Your Creativity with <Text style={styles.highlight}>SnapStory</Text>
-        </Text>
-        <Text style={styles.description}>
-          Our app is a generative storytelling app that takes input from users and creates video stories. Follow these steps to create your own video:
-        </Text>
-
+        
+        <TouchableOpacity style={styles.getStartedButton} onPress={()=>props.navigation.navigate("Home")}>
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
+        <View style={styles.section}>
+        <Text style={styles.header}>Create Videos with <Text style={styles.highlight}>Text Prompt</Text></Text>
+        <Text style={{fontSize:16, color:'white', textAlign:'center'}}>
+          Unleash Your Creativity with SnapStory. Publish ready videos with zero creation skills</Text>
+          </View>
         {/* Get Started Button */}
         <TouchableOpacity style={styles.getStartedButton} onPress={()=>props.navigation.navigate("Login")}>
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>
+        <Video
+          source={{ uri: 'https://cdn.pixabay.com/video/2020/09/15/49981-459802291_tiny.mp4' }} // Replace with your video URL
+          style={styles.video}
+          resizeMode="contain"
+          shouldPlay
+          isLooping
+        />
+        <Video
+        source={{ uri: 'https://cdn.pixabay.com/video/2020/04/08/35427-407130886_large.mp4' }} // Use a valid URL
+        style={styles.video}
+        
+        resizeMode="contain"
+        shouldPlay
+        isLooping
+        
+/>
+      
 
       {/* Section 2: How to Use the App */}
       <View style={styles.section}>
         
       {/* Section 2: How to Use the App with Modals */}
       <View style={styles.section}>
-        <Text style={styles.section2}>How to Create your own Stories.</Text>
+        <Text style={styles.section2}>How to Create your own Stories</Text>
         <View style={styles.grid}>
           <TouchableOpacity style={styles.gridItem} onPress={() => openModal(1)}>
             <Text style={styles.gridTitle}>1. Enter Story Details</Text>
@@ -140,7 +165,7 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity,Modal, Butt
       {/* Section 3: What Can You Create */}
       <View style={styles.section}>
         <Text style={styles.header}>What Can You Create</Text>
-        <View style={styles.singleColumnGrid}>
+        <View style={styles.grid}>
           {creationData.map((item, index) => (
             <View key={index} style={styles.gridItem}>
               <Image source={{ uri: item.imageUrl }} style={styles.image} />
@@ -158,7 +183,7 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity,Modal, Butt
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: '#000',
     padding: 20,
   },
   section: {
@@ -172,11 +197,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   section2: {
-    fontSize: 25,
+    fontSize: 22,
     color: '#fff',
     marginBottom: 10,
     fontWeight: 'bold',
-    textAlign: 'justify',
+    textAlign: 'center',
   },
   grid: {
     flexDirection: 'row',
@@ -185,7 +210,7 @@ const styles = StyleSheet.create({
   },
   gridItem: {
     width: '48%',
-    backgroundColor: '#ec8afd', // Light purple
+    backgroundColor: '#f4bafd',//'#ec8afd', Light purple
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
@@ -195,59 +220,20 @@ const styles = StyleSheet.create({
     color: '#6a0dad',
     fontWeight: 'bold',
   },
-  gridText: {
-    color: '#000',
-    fontSize: 14,
-    textAlign: 'justify',
-  },
-  section3:{
-    fontSize: 25,
-    color: '#fff',
-    marginBottom: 10,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
   description: {
     color: '#fff',
     fontSize: 20,
     marginBottom: 10,
     textAlign: 'justify'
   },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  singleColumnGrid: {
-    flexDirection: 'column',
-  },
-  gridItem: {
-    width: '48%',
-    backgroundColor: '#ec8afd', // Light shade of purple
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-  },
-  gridTitle: {
-    fontSize: 20,
-    color: '#6a0dad',
-    fontWeight: 'bold',
-    marginBottom: 5,
-    
-  },
-  gridText: {
-    color: '#000',
-    fontSize: 16,
-    lineHeight: 20,
-    textAlign: 'justify'
-  },
+  
   highlight: {
     color: '#bb86fc', // Purple color for highlighted text
     fontWeight: 'bold',
   },
   image: {
     width: '100%',
-    height: 400, // Adjust height based on your layout preference
+    height: 150, // Adjust height based on your layout preference
     marginBottom: 5,
     borderRadius: 5,
   },
@@ -257,7 +243,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   getStartedButton: {
-    backgroundColor: '#bb86fc',//'#8A2BE2', // Purple background color
+    backgroundColor: '#7B1FA2', //'#8A2BE2', // Purple background color
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 30,
@@ -297,9 +283,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
   },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+  video: {
+    width: '100%', // Set to full width
+    height: 200, // Set height
+    borderRadius: 10, // Rounded corners
+    margin: 10, // Space around the video
+    backgroundColor: '#000',
   },
 });
 export default InfoScreen;
