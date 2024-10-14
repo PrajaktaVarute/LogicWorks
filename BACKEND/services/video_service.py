@@ -33,31 +33,24 @@ def fetch_videos(query, num_videos=2):
 
 def create_final_video(video_files, voice_file, duration, output_file='final_video.mp4'):
     """Concatenate the video clips and combine them with the generated voice."""
-    # Load the video clips and set their duration
     clips = [mp.VideoFileClip(video_file).subclip(0, min(30, mp.VideoFileClip(video_file).duration)) for video_file in video_files]
     
-    # Concatenate the video clips
     final_video = mp.concatenate_videoclips(clips, method="compose")
 
-    # Load the audio file (voice)
     audio = mp.AudioFileClip(voice_file)
-    final_duration = duration * 60  # Convert minutes to seconds
+    final_duration = duration * 60  
 
-    # Set the final video to have the correct duration
     if final_video.duration > final_duration:
         final_video = final_video.subclip(0, final_duration)
     
-    # Trim or loop the audio to match the final video duration
     if audio.duration > final_duration:
         audio = audio.subclip(0, final_duration)
 
-    # Set the audio to the video and export the final video
     final_video = final_video.set_audio(audio)
     final_video.write_videofile(output_file, codec='libx264', audio_codec='aac', threads=4, preset='fast')
 
 def generate_video_story(story, duration):
     """Generate a video story based on the provided text and duration."""
-    # Generate voice with the full text
     generate_voice(story)
 
     print("Choose a topic for the video:")
@@ -73,8 +66,7 @@ def generate_video_story(story, duration):
     video_topic_index = int(input("Enter the number corresponding to the topic: ")) - 1
     selected_topic = topics[video_topic_index % len(topics)]
     
-    # Fetch video files and generate the final video
-    video_files = fetch_videos(selected_topic, num_videos=2)  # Reduce to 2 videos for faster processing
+    video_files = fetch_videos(selected_topic, num_videos=2) 
     create_final_video(video_files, 'voice.mp3', duration)
 
 # New function for handling requests from the frontend
