@@ -7,6 +7,6 @@ video_blueprint = Blueprint('video', __name__)
 def generate():
     data = request.json
     story = data.get('prompt')
-    duration = data.get('duration', 1)  # Default duration if not provided
+    duration = data.get('duration', 1)  
     handle_video_generation(story, duration)
     return jsonify({"message": "Video generation started."})
