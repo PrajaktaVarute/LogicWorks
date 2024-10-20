@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Animated } from 'react-native';
 
-const WelcomeScreen = () => {
+ const  WelcomeScreen = () => {
   const letters = ['S', 'n', 'a', 'p','S', 't','o','r','y'];  // Define the letters of "Uber"
   const animatedValues = useRef(letters.map(() => new Animated.Value(0))).current; // Create Animated.Values for each letter
   const taglineOpacity = useRef(new Animated.Value(0)).current; // Animated value for tagline opacity
@@ -23,8 +23,8 @@ const WelcomeScreen = () => {
       // Fade in the tagline after a slight delay
       Animated.timing(taglineOpacity, {
         toValue: 1,
-        duration: 200,
-        delay: 300, // Slight delay after the last letter
+        duration: 50,
+        delay: 50, // Slight delay after the last letter
         useNativeDriver: true,
       }),
     ]).start();
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     marginBottom: 5, // Space between letters and tagline
   },
   letter: {
-    fontSize: 65, // Larger font for more impact
+    fontSize: 55, // Larger font for more impact
     fontWeight: 'bold',
     color: '#f8f8f8', // Softer white for a modern look
     marginHorizontal: 5,
@@ -87,5 +87,5 @@ const styles = StyleSheet.create({
     
   },
 });
-
 export default WelcomeScreen;
+

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Text,View,StyleSheet, TextInput,TouchableOpacity} from 'react-native';
 
-const LoginScreen=(props)=>{
+ const  SignupScreen=(props)=>{
 
 const[name,setName]=useState("");
 const[email,setEmail]=useState("");
@@ -12,7 +12,7 @@ const[password,setPassword]=useState("");
 const saveAPIData=async()=>{
   const data={
     name:"rohit",
-
+    
     email:"rohit@gmail.com",
     password:"1234"
   }
@@ -38,7 +38,7 @@ const saveAPIData=async()=>{
 
 return (
     <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Sign Up</Text>
         <TextInput
         style={styles.input}
         placeholder="Name"
@@ -61,15 +61,14 @@ return (
         onChangeText={(text)=>setPassword(text)}
         value={password}
       />
-
-      <TouchableOpacity style={styles.button} onPress={()=>props.navigation.navigate("DrawerScreen")}>
-        <Text style={styles.buttonText}>Login</Text>
+      
+      <TouchableOpacity style={styles.button} onPress={()=>props.navigation.navigate("Login")}>
+        <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-
-      <Text style={styles.linkText} onPress={()=>props.navigation.navigate("Signup")} >Don't have an account? Sign Up</Text>
-
+      
+      
     </View>
-
+    
 );
 };
 
@@ -108,12 +107,9 @@ const styles=StyleSheet.create({
       textAlign: 'center',
       marginBottom: 40,
     },
-    linkText: {
-      color: '#bb86fc', // Link text color
-      textAlign: 'center',
-      marginTop: 20,
-    },
+    
   }
-)
+);
+export default SignupScreen;
 
-export default LoginScreen;
+
