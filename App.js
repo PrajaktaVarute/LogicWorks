@@ -19,10 +19,10 @@ function DrawerScreen(){
     <Drawer.Navigator
       screenOptions={{
         drawerStyle: {
-          backgroundColor: '#000',
+          backgroundColor: '#fdfeff',
         },
         drawerLabelStyle:{
-          color: '#fff',
+          color: '#057c8e',
         }
       }}
     initialRouteName="Home">
@@ -30,10 +30,10 @@ function DrawerScreen(){
        options={{
         title: 'Home',
         headerStyle: {
-          backgroundColor: '#000',
+          backgroundColor: '#fdfeff',
 
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#057c8e',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -43,13 +43,13 @@ function DrawerScreen(){
       <Drawer.Screen name="About" component={InfoScreen} options={{
         headerShown: false,
         drawerIcon: ({ color, size }) => (
-          <Icon name="Home" size={30} color={'#fff'} />
+          <Icon name="Home" size={30} color={'#057c8e'} />
         ),
         }} />
       <Drawer.Screen name="Logout" component={LoginScreen} options={{
         headerShown: false,
         drawerIcon: ({ color, size }) => (
-          <Icon name="logout" size={size} color={'#fff'} />
+          <Icon name="logout" size={size} color={'#057c8e'} />
         ),
         }}/>
     </Drawer.Navigator>
@@ -83,9 +83,9 @@ const App = () => {
               title: 'SnapStory',
               
               headerStyle: {
-                backgroundColor: '#000',
+                backgroundColor: '#fdfeff',
               },
-              headerTintColor: '#fff',
+              headerTintColor: '#057c8e',
               headerTitleStyle: {
                 fontWeight: 'bold',
               },
@@ -99,9 +99,9 @@ const App = () => {
               headerShown: true, // Ensure this is true
               
               headerStyle: {
-                backgroundColor: '#000',
+                backgroundColor: '#fdfeff',
               },
-              headerTintColor: '#fff',
+              headerTintColor: '#057c8e',
               headerTitleStyle: {
                 fontWeight: 'bold',
               },
@@ -114,9 +114,9 @@ const App = () => {
               title: 'Signup',
               
               headerStyle: {
-                backgroundColor: '#000',
+                backgroundColor: '#fdfeff',
               },
-              headerTintColor: '#fff',
+              headerTintColor: '#057c8e',
               headerTitleStyle: {
                 fontWeight: 'bold',
               },
@@ -132,15 +132,15 @@ const App = () => {
                 <Icon
                   name="menu"
                   size={30}
-                  color="#fff"
+                  color="#057c8e"
                   onPress={()=>alert('drawer opened')} // Placeholder drawer logic
                   style={{ marginRight: 10 }}
                 />
               ),
               headerStyle: {
-                backgroundColor: '#000',
+                backgroundColor: '#fdfeff',
               },
-              headerTintColor: '#fff',
+              headerTintColor: '#057c8e',
               headerTitleStyle: {
                 fontWeight: 'bold',
               },

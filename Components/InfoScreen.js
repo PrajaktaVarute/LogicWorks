@@ -59,11 +59,11 @@ import Video from 'react-native-video';
         
         <View style={styles.section}>
         <Text style={styles.header}>Create Videos with <Text style={styles.highlight}>Text Prompt</Text></Text>
-        <Text style={{fontSize:16, color:'white', textAlign:'center'}}>
+        <Text style={{fontSize:16, color:'black', textAlign:'center'}}>
           Unleash Your Creativity with SnapStory. Publish ready videos with zero creation skills</Text>
           </View>
         {/* Get Started Button */}
-        <TouchableOpacity style={styles.getStartedButton} onPress={()=>props.navigation.navigate("Login")}>
+        <TouchableOpacity style={styles.getStartedButton} onPress={()=>props.navigation.navigate("Signup")}>
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>
@@ -181,7 +181,7 @@ import Video from 'react-native-video';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#2E073F',
+    backgroundColor:'#fdfeff',
     padding: 20,
   },
   section: {
@@ -189,14 +189,14 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 35,
-    color: '#fff',
+    color: '#000',
     marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   section2: {
     fontSize: 22,
-    color: '#fff',
+    color: '#000',
     marginBottom: 10,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -208,25 +208,25 @@ const styles = StyleSheet.create({
   },
   gridItem: {
     width: '48%',
-    backgroundColor: '#f4bafd',//'#ec8afd', Light purple
+    backgroundColor: '#c1e3e7',//'#ec8afd', Light purple
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
   },
   gridTitle: {
     fontSize: 18,
-    color: '#6a0dad',
+    color: '#057c8e',
     fontWeight: 'bold',
   },
   description: {
-    color: '#fff',
+    color: '#000',
     fontSize: 20,
     marginBottom: 10,
     textAlign: 'justify'
   },
   
   highlight: {
-    color: '#bb86fc', // Purple color for highlighted text
+    color: '#057c8e', // Purple color for highlighted text
     fontWeight: 'bold',
   },
   image: {
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   getStartedButton: {
-    backgroundColor: '#7A1CAC', //'#8A2BE2', // Purple background color
+    backgroundColor: '#057c8e', //'#8A2BE2', // Purple background color
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 30,
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   modalView: {
-    backgroundColor:'#fff',
+    backgroundColor:'#fdfeff',
     margin: 30,
     padding: 20,
     borderRadius: 10,
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#6a0dad',
+    color: '#057c8e',
     marginBottom: 15,
   },
   modalText: {
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   closeButton: {
-    backgroundColor: '#bb86fc',
+    backgroundColor: '#057c8e',
     padding: 10,
     borderRadius: 20,
     alignItems: 'center',
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     height: 200, // Set height
     borderRadius: 10, // Rounded corners
     margin: 10, // Space around the video
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
   },
 });
 export default InfoScreen;

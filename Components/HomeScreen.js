@@ -65,7 +65,7 @@ const HomeScreen = ({navigation}) => {
         <Text style={styles.buttonText}>Generate video</Text>
       </TouchableOpacity>
 
-      {loading && <ActivityIndicator size="large" color="#0000ff" />}
+      {loading && <ActivityIndicator size="large" color="#057c8e" />}
       {error && <Text style={styles.errorText}>{error}</Text>}
       {videoURL && (
         <Video
@@ -83,7 +83,7 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: '#fdfeff;',
     padding: 20,
     justifyContent: 'center',
   },
@@ -93,16 +93,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   input: {
-    height: 100,
-    backgroundColor: '#1e1e1e',
-    color: '#ffffff',
+    height: 60,
+    backgroundColor: '#fdfeff',
+    color: '#000',
     marginBottom: 20,
     paddingHorizontal: 10,
     borderRadius: 8,
   },
   button: {
     height: 50,
-    backgroundColor: '#bb86fc',
+    backgroundColor: '#057c8e',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,

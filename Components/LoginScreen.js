@@ -78,13 +78,13 @@ const styles=StyleSheet.create({
     container:
     {
       flex:1,
-      backgroundColor:'#000',
+      backgroundColor:'#fdfeff;',
       padding:20,
       justifyContent:'center',
     },
     input:{
       height:50,
-      backgroundColor:'#1e1e1e',
+      backgroundColor:'#fdfeff',
       color:'#ffffff',
       marginBottom:20,
       paddingHorizontal:10,
@@ -92,7 +92,7 @@ const styles=StyleSheet.create({
     },
     button: {
       height: 50,
-      backgroundColor: '#bb86fc', // Dark theme button color
+      backgroundColor: '#057c8e', // Dark theme button color
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 8,
@@ -102,14 +102,14 @@ const styles=StyleSheet.create({
       fontSize: 18,
     },
     title: {
-      color: '#ffffff', // Title text color
+      color: '#000', // Title text color
       fontSize: 24,
       fontWeight: 'bold',
       textAlign: 'center',
       marginBottom: 40,
     },
     linkText: {
-      color: '#bb86fc', // Link text color
+      color: '#057c8e', // Link text color
       textAlign: 'center',
       marginTop: 20,
     },

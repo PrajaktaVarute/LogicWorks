@@ -11,7 +11,7 @@ import { StyleSheet, Text, View, Animated } from 'react-native';
     const animations = animatedValues.map((animatedValue, index) => {
       return Animated.timing(animatedValue, {
         toValue: 1,
-        duration: 50,  // Each letter takes 600ms to appear
+        duration: 70,  // Each letter takes 600ms to appear
         delay: index * 50, // Delay each letter by 300ms
         useNativeDriver: true,
       });
@@ -19,7 +19,7 @@ import { StyleSheet, Text, View, Animated } from 'react-native';
 
     // Start the tagline animation after all the letters have been animated
     Animated.sequence([
-      Animated.stagger(50, animations),
+      Animated.stagger(70, animations),
       // Fade in the tagline after a slight delay
       Animated.timing(taglineOpacity, {
         toValue: 1,
@@ -65,7 +65,7 @@ import { StyleSheet, Text, View, Animated } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212', // Dark gray background for elegance
+    backgroundColor: '#fdfeff;', // Dark gray background for elegance
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -76,15 +76,15 @@ const styles = StyleSheet.create({
   letter: {
     fontSize: 55, // Larger font for more impact
     fontWeight: 'bold',
-    color: '#f8f8f8', // Softer white for a modern look
+    color: '#000', // Softer white for a modern look
     marginHorizontal: 5,
   },
   tagline: {
-    fontSize: 25, // Smaller font for the tagline
-    color: '#a29bfe', // Light purple for contrast
+    fontSize: 28, 
+    color: '#057c8e', 
     marginTop: 10,
     fontWeight: '300',
-    
+    fontWeight: 'bold',
   },
 });
 export default WelcomeScreen;
