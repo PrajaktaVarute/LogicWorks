@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/Ionicons'; 
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
 import LoginScreen from './Components/LoginScreen';
 import InfoScreen from './Components/InfoScreen';
 import WelcomeScreen from './Components/WelcomeScreen';
 import HomeScreen from './Components/HomeScreen';
 import SignupScreen from './Components/SignupScreen';
-
+import AccountScreen from './Components/AccountScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +33,9 @@ function DrawerScreen(){
           backgroundColor: '#fdfeff',
 
         },
+        drawerIcon: ({ color, size }) => (
+          <Icon name="home" size={25} color={'#057c8e'} />
+        ),
         headerTintColor: '#057c8e',
         headerTitleStyle: {
           fontWeight: 'bold',
@@ -43,13 +46,19 @@ function DrawerScreen(){
       <Drawer.Screen name="About" component={InfoScreen} options={{
         headerShown: false,
         drawerIcon: ({ color, size }) => (
-          <Icon name="Home" size={30} color={'#057c8e'} />
+          <Icon name="dashboard" size={25} color={'#057c8e'} />
         ),
         }} />
       <Drawer.Screen name="Logout" component={LoginScreen} options={{
         headerShown: false,
         drawerIcon: ({ color, size }) => (
-          <Icon name="logout" size={size} color={'#057c8e'} />
+          <Icon name="exit-to-app" size={25} color={'#057c8e'} />
+        ),
+        }}/>
+      <Drawer.Screen name="Account" component={AccountScreen} options={{
+        headerShown: false,
+        drawerIcon: ({ color, size }) => (
+          <Icon name="person" size={25} color={'#057c8e'} />
         ),
         }}/>
     </Drawer.Navigator>
@@ -122,7 +131,7 @@ const App = () => {
               },
             }}
           />
-          <Stack.Screen
+           <Stack.Screen
             name="Home"
             component={HomeScreen} // Use DrawerNavigator instead of HomeScreen
             options={{
@@ -145,7 +154,7 @@ const App = () => {
                 fontWeight: 'bold',
               },
             }}
-          />
+          /> 
           <Stack.Screen name="DrawerScreen" component={DrawerScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       )}

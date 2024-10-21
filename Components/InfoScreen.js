@@ -66,6 +66,7 @@ import Video from 'react-native-video';
         <TouchableOpacity style={styles.getStartedButton} onPress={()=>props.navigation.navigate("Signup")}>
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
+        
       </View>
         <Video
           source={{ uri: 'https://cdn.pixabay.com/video/2020/09/15/49981-459802291_tiny.mp4' }} // Replace with your video URL

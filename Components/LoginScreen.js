@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
-import {Text,View,StyleSheet, TextInput,TouchableOpacity} from 'react-native';
-
+import {Text,View,StyleSheet, TextInput,TouchableOpacity,Alert} from 'react-native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const LoginScreen=(props)=>{
 
 const[name,setName]=useState("");
 const[email,setEmail]=useState("");
 const[password,setPassword]=useState("");
-
-
+const userData={
+  email : email,
+  password
+}
+function handleSubmit(){
+  console.log(email,password);
+  axios.post("http://10.40.3.134:5002/login-user",userData)
+  .then(res=>{
+    console.log(res.data);
+    if(res.data.status=="ok")
+    {
+      Alert.alert('Logged in successful');
+      AsyncStorage.setItem("token",res.data.data);
+      props.navigation.navigate("DrawerScreen");
+       
+    }
+      
+  });  
+  
+}
 
 const saveAPIData=async()=>{
   const data={
@@ -17,7 +36,7 @@ const saveAPIData=async()=>{
     password:"1234"
   }
 
-  const url="http://10.40.16.106:3000/users";
+  const url="http://10.40.4.57:3000/login";
   let result=await fetch(url,
     {
       method:"POST",
@@ -62,10 +81,12 @@ return (
         value={password}
       />
 
-      <TouchableOpacity style={styles.button} onPress={()=>props.navigation.navigate("DrawerScreen")}>
+       {/* <TouchableOpacity style={styles.button} onPress={()=>props.navigation.navigate("DrawerScreen")}>
         <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-
+      </TouchableOpacity>   */}
+      <TouchableOpacity style={styles.button} onPress={()=>handleSubmit()}>
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity> 
       <Text style={styles.linkText} onPress={()=>props.navigation.navigate("Signup")} >Don't have an account? Sign Up</Text>
 
     </View>
@@ -85,7 +106,7 @@ const styles=StyleSheet.create({
     input:{
       height:50,
       backgroundColor:'#fdfeff',
-      color:'#ffffff',
+      color:'#888',
       marginBottom:20,
       paddingHorizontal:10,
       borderRadius:8,

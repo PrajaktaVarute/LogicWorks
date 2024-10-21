@@ -1,13 +1,49 @@
-import React, { useState } from 'react';
-import { View, ActivityIndicator, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, ActivityIndicator, StyleSheet, TextInput, TouchableOpacity, Text, BackHandler } from 'react-native';
 import Video from 'react-native-video';
-
+import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 const HomeScreen = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [videoURL, setVideoURL] = useState(null);
   const [error, setError] = useState(null);
   const [userPrompt, setUserPrompt] = useState(''); // State to store user input
   const [time, setDuration] = useState('1');
+  const handleBackPress=()=>{
+    Alert.alert('Exit App','Are you sure you want to exit?',[
+      {
+        text: 'Cancel',
+        onPress: ()=>null,
+        style: 'cancel',
+      },
+      {
+        text: 'Exit',
+        onPress:()=>BackHandler.exitApp(),
+      },
+    ]);
+    return true;
+  };
+  useFocusEffect(
+    React.useCallback(()=>{
+      BackHandler.addEventListener('hardwareBackPress',handleBackPress);
+    return ()=>{BackHandler.removeEventListener('hardwareBackPress',handleBackPress);};
+    })
+  );
+  async function getData() {
+    const token = await AsyncStorage.getItem('token');
+    console.log(token);
+    axios
+      .post("http://10.40.3.134:5002/userData",{token:token})
+      .then(res=>{
+        console.log(res.data);
+        
+      });
+  }
+  useEffect(()=>{
+    getData();
+    
+  },[]);
   const fetchAndPlayVideo = async () => {
     setLoading(true);
     setVideoURL(null); // Reset video URL before fetching a new video
