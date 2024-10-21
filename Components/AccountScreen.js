@@ -11,9 +11,10 @@ export default AccountScreen = (props) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}></View>
-      <Image
+      <Image 
         style={styles.avatar}
-        source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }}
+        //source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }}
+        source={{ uri: 'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png' }}
       />
       <View style={styles.body}>
         <View style={styles.bodyContent}>
